@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans&display=swap');
+
+:root {
+    --academic-blue: #1a4b8c;
+    --academic-dark: #0d2b4e;
+    --academic-light: #e9f1f8;
+    --accent-gold: #ffc107;
+    --accent-teal: #20c997;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f9fbfd;
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: var(--academic-blue);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 30px;
+    background-color: var(--academic-light);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+}
+
+select, button {
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+select {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: var(--academic-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--academic-dark);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+table thead {
+    background-color: var(--academic-blue);
+    color: white;
+}
+
+table tbody tr:hover {
+    background-color: var(--academic-light);
+}
+
+a {
+    display: inline-block;
+    margin-top: 30px;
+    color: var(--accent-gold);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--academic-dark);
+}

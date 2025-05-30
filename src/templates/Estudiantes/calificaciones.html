@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Estudiante</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/DashboardEstudiante.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <h1>Bienvenido al Dashboard de Estudiantes</h1>
+    <p>Hola, {{ session['correo'] }}. Este es tu panel de estudiante.</p>
+
+    <!-- Menú para seleccionar el semestre -->
+    <form method="POST" action="{{ url_for('main.calificaciones') }}">
+        <label for="id_semestre">Selecciona un semestre:</label>
+        <select name="id_semestre" id="id_semestre" required>
+            <option value="">-- Seleccionar --</option>
+            {% for semestre in semestres %}
+                <option value="{{ semestre.id }}" {% if semestre.id == id_semestre|int %}selected{% endif %}>
+                    {{ semestre.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Ver Calificaciones</button>
+    </form>
+
+    <!-- Tabla de calificaciones -->
+    {% if calificaciones %}
+        <h2>Resultados</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Curso</th>
+                    <th>Sección</th>
+                    <th>Semestre</th>
+                    <th>Zona</th>
+                    <th>Parcial 1</th>
+                    <th>Parcial 2</th>
+                    <th>Final</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for calificacion in calificaciones %}
+                    <tr>
+                        <td>{{ calificacion.Estudiante }}</td>
+                        <td>{{ calificacion.NombreCurso }}</td>
+                        <td>{{ calificacion.Seccion }}</td>
+                        <td>{{ calificacion.Semestre }}</td>
+                        <td>{{ calificacion.Zona }}</td>
+                        <td>{{ calificacion.Parcial1 }}</td>
+                        <td>{{ calificacion.Parcial2 }}</td>
+                        <td>{{ calificacion.Final }}</td>
+                        <td>{{ calificacion.Total }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay calificaciones disponibles para el semestre seleccionado.</p>
+    {% endif %}
+
+    <!-- Opción para cerrar sesión -->
+    <a href="{{ url_for('main.logout') }}">Cerrar sesión</a>
+</body>
+</html>

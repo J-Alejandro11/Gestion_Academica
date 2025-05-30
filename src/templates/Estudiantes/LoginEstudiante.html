@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema De Gestión Académica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/LoginEstudiante.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="academic-container">
+        <a href="{{ url_for('main.index') }}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
+
+        <div class="hero-section">
+            <div class="university-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>UNIVERSIDAD UMG</span>
+            </div>
+        </div>
+
+        <div class="notebook-container">
+            <div class="notebook">
+                <!-- Página de Login -->
+                <div class="page front-page">
+                    <div class="feature-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h2>Inicio de Sesión</h2>
+                    <form class="auth-form" method="POST" action="{{ url_for('main.login') }}">
+                        <input type="email" name="email" placeholder="Correo institucional" required>
+                        <input type="password" name="password" placeholder="Contraseña" required>
+                        <button type="submit" class="auth-button">Ingresar</button>
+                    </form>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul class="flash-messages">
+                                {% for category, message in messages %}
+                                    <li class="{{ category }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+/* Variables de color */
+:root {
+    --academic-blue: #1a4b8c;
+    --academic-dark: #0d2b4e;
+    --accent-gold: #ffc107;
+    --accent-teal: #20c997;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --page-color: #f9f3e6;
+}
+
+/* Botón de regreso */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: var(--admin-blue);
+    text-decoration: none;
+    font-size: 1rem;
+    z-index: 100;
+    background: rgba(255,255,255,0.8);
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Estilos base */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f5f7fa;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.academic-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: var(--academic-blue);
+    text-decoration: none;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.back-button i {
+    margin-right: 5px;
+}
+
+/* Estilos del encabezado */
+.hero-section {
+    background: linear-gradient(135deg, var(--academic-blue) 0%, var(--academic-dark) 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+}
+
+.university-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.university-logo i {
+    margin-right: 15px;
+    color: var(--accent-gold);
+}
+
+/* Efecto libreta */
+.notebook-container {
+    perspective: 1000px;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.notebook {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+    transform-origin: center;
+}
+
+.notebook.flipped {
+    transform: rotateY(180deg);
+}
+
+.page {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--page-color);
+    border: 1px solid #e0d6c2;
+}
+
+.back-page {
+    transform: rotateY(180deg);
+}
+
+/* Estilos del formulario */
+.feature-icon {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.feature-icon i {
+    font-size: 2.5rem;
+    color: var(--academic-blue);
+}
+
+h2 {
+    text-align: center;
+    color: var(--academic-blue);
+    margin-bottom: 30px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    transition: border 0.3s;
+}
+
+.auth-form input:focus {
+    border-color: var(--academic-blue);
+    outline: none;
+}
+
+.auth-button {
+    background: var(--academic-blue);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.auth-button:hover {
+    background: var(--academic-dark);
+}
+
+.flip-button {
+    background: transparent;
+    color: var(--academic-blue);
+    border: 2px solid var(--academic-blue);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.flip-button:hover {
+    background: var(--academic-blue);
+    color: white;
+}
+
+/* Efecto de página */
+.page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 30px;
+    right: 30px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 24px,
+        rgba(0,0,0,0.1) 25px
+    );
+    pointer-events: none;
+    border-radius: 15px;
+    z-index: -1;
+}
