@@ -1,0 +1,423 @@
+/* Estilos generales UMG */
+:root {
+    --umg-blue: #0056b3;
+    --umg-dark-blue: #003366;
+    --umg-light-blue: #e6f0ff;
+    --umg-white: #ffffff;
+    --umg-gray: #f8f9fa;
+    --umg-dark-gray: #343a40;
+    --umg-border: #dee2e6;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.umg-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header UMG */
+.umg-header {
+    background-color: var(--umg-dark-blue);
+    color: var(--umg-white);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.umg-logo h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.umg-logo p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.umg-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.umg-nav a {
+    color: var(--umg-white);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.3s;
+}
+
+.umg-nav a:hover {
+    opacity: 0.8;
+}
+
+.umg-nav .active a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Main Content */
+.umg-main {
+    display: flex;
+    flex: 1;
+}
+
+/* Sidebar */
+.umg-sidebar {
+    width: 280px;
+    background-color: var(--umg-white);
+    border-right: 1px solid var(--umg-border);
+    padding: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--umg-border);
+}
+
+.user-avatar i {
+    font-size: 3rem;
+    color: var(--umg-dark-blue);
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome {
+    font-size: 0.9rem;
+    color: var(--umg-dark-gray);
+}
+
+.email {
+    font-weight: 500;
+    color: var(--umg-dark-blue);
+}
+
+.sidebar-menu h3 {
+    color: var(--umg-dark-blue);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--umg-border);
+}
+
+.sidebar-menu ul {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--umg-dark-gray);
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--umg-light-blue);
+    color: var(--umg-dark-blue);
+}
+
+.sidebar-menu .active a {
+    background-color: var(--umg-blue);
+    color: var(--umg-white);
+}
+
+/* Main Content Area */
+.umg-content {
+    flex: 1;
+    padding: 25px;
+    background-color: var(--umg-gray);
+}
+
+.umg-content-header {
+    margin-bottom: 25px;
+}
+
+.umg-content-header h2 {
+    color: var(--umg-dark-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: var(--umg-dark-gray);
+}
+
+.breadcrumb span:last-child {
+    font-weight: 500;
+    color: var(--umg-dark-blue);
+}
+
+/* Cards */
+.umg-card {
+    background-color: var(--umg-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--umg-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    color: var(--umg-dark-blue);
+    font-size: 1.2rem;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Form Elements */
+.umg-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--umg-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--umg-white);
+}
+
+.umg-input {
+    padding: 10px 15px;
+    border: 1px solid var(--umg-border);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-input {
+    width: 250px;
+    padding-left: 35px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+
+.grade-input {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+}
+
+/* Buttons */
+.umg-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.umg-btn-sm {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+}
+
+.umg-btn-primary {
+    background-color: var(--umg-blue);
+    color: var(--umg-white);
+}
+
+.umg-btn-primary:hover {
+    background-color: #004494;
+}
+
+.umg-btn-secondary {
+    background-color: var(--umg-white);
+    color: var(--umg-blue);
+    border: 1px solid var(--umg-blue);
+}
+
+.umg-btn-secondary:hover {
+    background-color: var(--umg-light-blue);
+}
+
+/* Semester Selector */
+.semester-selector {
+    display: flex;
+    gap: 15px;
+}
+
+.semester-selector .umg-select {
+    flex: 1;
+    max-width: 400px;
+}
+
+/* Courses Grid */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    border: 1px solid var(--umg-border);
+    border-radius: 6px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.course-info h4 {
+    color: var(--umg-dark-blue);
+    margin-bottom: 5px;
+}
+
+.course-info p {
+    font-size: 0.9rem;
+    color: var(--umg-dark-gray);
+}
+
+/* Table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.umg-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.umg-table th, .umg-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--umg-border);
+}
+
+.umg-table th {
+    background-color: var(--umg-light-blue);
+    color: var(--umg-dark-blue);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.umg-table tr:hover {
+    background-color: rgba(0, 86, 179, 0.05);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+}
+
+.badge-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+}
+
+/* Footer */
+.umg-footer {
+    background-color: var(--umg-dark-blue);
+    color: var(--umg-white);
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .umg-main {
+        flex-direction: column;
+    }
+
+    .umg-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--umg-border);
+    }
+
+    .semester-selector {
+        flex-direction: column;
+    }
+
+    .semester-selector .umg-select {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .umg-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .umg-nav ul {
+        justify-content: center;
+    }
+
+    .card-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+}

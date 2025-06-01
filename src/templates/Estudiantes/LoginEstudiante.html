@@ -34,15 +34,6 @@
                         <input type="password" name="password" placeholder="Contraseña" required>
                         <button type="submit" class="auth-button">Ingresar</button>
                     </form>
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            <ul class="flash-messages">
-                                {% for category, message in messages %}
-                                    <li class="{{ category }}">{{ message }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    {% endwith %}
                 </div>
             </div>
         </div>

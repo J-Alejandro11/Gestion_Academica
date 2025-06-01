@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMG - Panel del Docente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/PanelDocente.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="umg-container">
+        <!-- Header UMG -->
+        <header class="umg-header">
+            <div class="umg-logo">
+                <h1>UNIVERSIDAD UMG</h1>
+                <p>Sistema de Gestión Académica</p>
+            </div>
+            <nav class="umg-nav">
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="active"><a href="#"><i class="fas fa-chalkboard-teacher"></i> Docente</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Contenido Principal -->
+        <main class="umg-main">
+            <div class="umg-sidebar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="welcome">Bienvenido</span>
+                        <span class="email">docente@miumq.edu.gt</span>
+                    </div>
+                </div>
+
+                <nav class="sidebar-menu">
+                    <h3>MENÚ DEL DOCENTE</h3>
+                    <ul>
+                        <li class="active"><a href="#" onclick="showSection('grades-section')"><i class="fas fa-tasks"></i> Asignación de Notas</a></li>
+                        <li><a href="#" onclick="showSection('students-list-section')"><i class="fas fa-users"></i> Listado de Estudiantes</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="umg-content">
+                <!-- Sección de Asignación de Notas -->
+                <div class="content-section active" id="grades-section">
+                    <div class="umg-content-header">
+                        <h2><i class="fas fa-tasks"></i> Asignación de Notas</h2>
+                        <div class="breadcrumb">
+                            <span>Docente</span> / <span>Asignación de Notas</span>
+                        </div>
+                    </div>
+
+                    <div class="umg-card">
+                        <div class="card-header">
+                            <h3>Seleccione el Semestre Académico</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="semester-selector">
+                                <select class="umg-select">
+                                    <option value="">-- Seleccione un semestre --</option>
+                                    <option value="2025-1">2025 - Primer Semestre</option>
+                                    <option value="2025-2">2025 - Segundo Semestre</option>
+                                    <option value="2026-1">2026 - Primer Semestre</option>
+                                </select>
+                                <button class="umg-btn umg-btn-primary">
+                                    <i class="fas fa-search"></i> Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Listado de Estudiantes -->
+                <div class="content-section" id="students-list-section">
+                    <div class="umg-content-header">
+                        <h2><i class="fas fa-users"></i> Listado de Estudiantes</h2>
+                        <div class="breadcrumb">
+                            <span>Docente</span> / <span>Listado de Estudiantes</span>
+                        </div>
+                    </div>
+
+                    <div class="umg-card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="umg-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Estudiante</th>
+                                            <th>Curso</th>
+                                            <th>Sección</th>
+                                            <th>Semestre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for estudiante in estudiantes %}
+                                        <tr>
+                                            <td>{{ estudiante.estudiante }}</td>
+                                            <td>{{ estudiante.curso }}</td>
+                                            <td>{{ estudiante.seccion }}</td>
+                                            <td>{{ estudiante.semestre }}</td>
+                                        </tr>
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="4">No hay estudiantes disponibles.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="umg-footer">
+            <p>© 2025 Universidad UMG - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar solo la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar el menú activo
+            document.querySelectorAll('.sidebar-menu li').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.parentElement.classList.add('active');
+            
+            return false;
+        }
+    </script>
+</body>
+</html>

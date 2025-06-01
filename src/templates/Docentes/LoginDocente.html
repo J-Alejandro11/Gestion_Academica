@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Docente | UMG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/LoginDocente.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="academic-container">
+        <a href="{{ url_for('main.index') }}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
+
+        <div class="hero-section">
+            <div class="university-logo">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>PORTAL DOCENTE UMG</span>
+            </div>
+        </div>
+
+        <div class="notebook-container">
+            <div class="notebook">
+                <div class="page">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h2>Acceso Docente</h2>
+                    <form class="auth-form" method="POST" action="{{ url_for('main.login_docentes') }}">
+                        <input type="email" name="correo" placeholder="Correo institucional" required>
+                        <input type="password" name="contrasena" placeholder="Contraseña" required>
+                        <button type="submit" class="auth-button">
+                            <i class="fas fa-sign-in-alt"></i> Ingresar
+                        </button>
+                    </form>
+                    <div class="docente-features">
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Registro de calificaciones</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clipboard-check"></i>
+                            <span>Acceso a Docentes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

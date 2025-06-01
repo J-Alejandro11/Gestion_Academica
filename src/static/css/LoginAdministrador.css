@@ -1,0 +1,249 @@
+/* Variables de color administrativo */
+:root {
+    --admin-blue: #0d3b66;
+    --admin-dark: #082947;
+    --admin-accent: #f4a261;
+    --admin-alert: #e76f51;
+    --admin-light: #f8f9fa;
+}
+
+/* Estilos base */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Botón de regreso */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: var(--admin-blue);
+    text-decoration: none;
+    font-size: 1rem;
+    z-index: 100;
+    background: rgba(255,255,255,0.8);
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Encabezado administrativo */
+.admin-header {
+    background: linear-gradient(135deg, var(--admin-blue) 0%, var(--admin-dark) 100%);
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    margin-bottom: 40px;
+}
+
+.admin-logo i {
+    font-size: 3rem;
+    color: var(--admin-accent);
+    margin-bottom: 15px;
+}
+
+.admin-logo span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.admin-logo p {
+    font-family: 'Open Sans', sans-serif;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Nota de seguridad */
+.security-notice {
+    background: var(--admin-alert);
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 0 auto 30px;
+    max-width: 80%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Panel de administración */
+.admin-notebook {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 800px;
+    margin: 0 auto 50px;
+    overflow: hidden;
+    border: 1px solid #e0e6ed;
+}
+
+.admin-page {
+    padding: 40px;
+}
+
+.admin-icon {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-icon i {
+    font-size: 2.5rem;
+    color: var(--admin-blue);
+    background: rgba(13, 59, 102, 0.1);
+    padding: 20px;
+    border-radius: 50%;
+}
+
+h2 {
+    text-align: center;
+    color: var(--admin-blue);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Formulario de administración */
+.admin-form {
+    max-width: 500px;
+    margin: 0 auto 40px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--admin-blue);
+    font-size: 0.95rem;
+}
+
+.input-group label i {
+    margin-right: 8px;
+    color: var(--admin-accent);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--admin-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.1);
+}
+
+.forgot-link {
+    display: block;
+    text-align: right;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--admin-alert);
+    text-decoration: none;
+}
+
+.admin-button {
+    width: 100%;
+    background: var(--admin-blue);
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.admin-button:hover {
+    background: var(--admin-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.admin-button i {
+    font-size: 1.2rem;
+}
+
+/* Herramientas administrativas */
+.admin-features {
+    border-top: 1px dashed #e0e6ed;
+    padding-top: 30px;
+    margin-top: 40px;
+}
+
+.admin-features h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--admin-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.admin-feature {
+    background: var(--admin-light);
+    border-radius: 8px;
+    padding: 25px 15px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid #e0e6ed;
+}
+
+.admin-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: var(--admin-accent);
+}
+
+.admin-feature i {
+    font-size: 2rem;
+    color: var(--admin-blue);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.admin-feature span {
+    font-weight: 500;
+    color: var(--admin-dark);
+}

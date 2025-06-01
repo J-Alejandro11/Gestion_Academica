@@ -8,7 +8,7 @@ def verificar_credenciales(correo, contrasena, rol_esperado):
     """
     try:
         query = text("""
-            SELECT IdRol,
+            SELECT IdRol
             FROM Usuarios
             WHERE Correo = :correo
               AND Contrasena = HASHBYTES('SHA2_256', :contrasena)

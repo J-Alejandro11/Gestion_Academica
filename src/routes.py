@@ -1,6 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
+from src.controllers.docentes_controller import verificar_credenciales_docente
 from src.controllers.estudiantes_controller import verificar_credenciales
 from src.controllers.calificaciones_controller import obtener_calificaciones_por_semestre
+from src.controllers.administrador_controller import verificar_credenciales_administrador
+from src.controllers.CursoEstudiante_controller import obtener_cursos_y_estudiantes_por_docente
 
 bp = Blueprint('main', __name__)
 
@@ -29,50 +32,24 @@ def login():
 
     return render_template('Estudiantes/LoginEstudiante.html')
 
-@bp.route('/login/estudiantes', methods=['GET', 'POST'])
-def login_estudiantes():
-    if request.method == 'POST':
-        correo = request.form.get('email')
-        contrasena = request.form.get('password')
-
-        if not correo or not contrasena:
-            flash('Por favor, completa todos los campos.', 'danger')
-            return render_template('Estudiantes/LoginEstudiante.html')
-
-        # Verificar credenciales y rol de estudiante
-        if verificar_credenciales(correo, contrasena, rol_esperado=1):  # Rol de estudiante
-            session['correo'] = correo
-            session['rol'] = 1
-            flash('Inicio de sesión exitoso como Estudiante', 'success')
-            return redirect(url_for('main.estudiante_dashboard'))  # Redirige al DashboardEstudiante
-        else:
-            flash('No tienes permiso para iniciar sesión como Estudiante.', 'danger')
-
-    return render_template('Estudiantes/LoginEstudiante.html')
-
-@bp.route('/login/docentes', methods=['GET', 'POST'])
+@bp.route('/login-docentes', methods=['GET', 'POST'])
 def login_docentes():
     if request.method == 'POST':
-        correo = request.form.get('email')
-        contrasena = request.form.get('password')
+        correo = request.form.get('correo')
+        contrasena = request.form.get('contrasena')
 
-        if not correo or not contrasena:
-            flash('Por favor, completa todos los campos.', 'danger')
-            return render_template('Docentes/LoginDocente.html')
-
-        # Verificar credenciales y rol de docente
-        if verificar_credenciales(correo, contrasena, rol_esperado=2):  # Rol de docente
-            session['correo'] = correo
+        if verificar_credenciales_docente(correo, contrasena):
+            session['correo'] = correo  # Guardar el correo en la sesión
             session['rol'] = 2
-            flash('Inicio de sesión exitoso como Docente', 'success')
-            return redirect(url_for('main.docente_dashboard'))
+            print(f"✅ Sesión iniciada para el correo: {correo}")  # Depuración
+            return redirect(url_for('main.panel_docente'))
         else:
-            flash('No tienes permiso para iniciar sesión como Docente.', 'danger')
+            flash('Credenciales incorrectas. Inténtalo de nuevo.', 'danger')
 
     return render_template('Docentes/LoginDocente.html')
 
-@bp.route('/login/administradores', methods=['GET', 'POST'])
-def login_administradores():
+@bp.route('/loginAdministrador', methods=['GET', 'POST'])
+def login_administrador():
     if request.method == 'POST':
         correo = request.form.get('email')
         contrasena = request.form.get('password')
@@ -127,8 +104,30 @@ def calificaciones():
 
     return render_template('Estudiantes/Calificaciones.html', calificaciones=calificaciones, semestres=semestres, id_semestre=id_semestre)
 
+@bp.route('/panel-docente')
+def panel_docente():
+    if session.get('rol') != 2:  # Verifica si el usuario es un docente
+        flash('No tienes permiso para acceder a esta página.', 'danger')
+        return redirect(url_for('main.index'))
+
+    # Llama a la función sin pasar argumentos
+    estudiantes = obtener_cursos_y_estudiantes_por_docente()
+
+    return render_template('Docentes/PanelDocente.html', estudiantes=estudiantes)
+
+docente_routes = Blueprint('docente_routes', __name__)
+
+@docente_routes.route('/panel-docente', methods=['GET'])
+def panel_docente():
+    if 'correo_docente' not in session:
+        return redirect(url_for('login'))  # Redirigir al login si no hay sesión activa
+
+    estudiantes = obtener_cursos_y_estudiantes_por_docente()
+    return render_template('Docentes/PanelDocente.html', estudiantes=estudiantes)
+
 @bp.route('/logout')
 def logout():
     session.clear()  # Limpia la sesión
     flash('Has cerrado sesión.', 'info')
     return redirect(url_for('main.index'))  # Redirige al inicio
+
