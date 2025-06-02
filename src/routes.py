@@ -4,6 +4,7 @@ from src.controllers.estudiantes_controller import verificar_credenciales
 from src.controllers.calificaciones_controller import obtener_calificaciones_por_semestre
 from src.controllers.administrador_controller import verificar_credenciales_administrador
 from src.controllers.CursoEstudiante_controller import obtener_cursos_y_estudiantes_por_docente
+from src.controllers.AsignacionNotas_controller import obtener_asignacion_notas
 
 bp = Blueprint('main', __name__)
 
@@ -104,30 +105,40 @@ def calificaciones():
 
     return render_template('Estudiantes/Calificaciones.html', calificaciones=calificaciones, semestres=semestres, id_semestre=id_semestre)
 
-@bp.route('/panel-docente')
+@bp.route('/panel-docente', methods=['GET', 'POST'])
 def panel_docente():
-    if session.get('rol') != 2:  # Verifica si el usuario es un docente
+    if 'correo' not in session or session.get('rol') != 2:
         flash('No tienes permiso para acceder a esta página.', 'danger')
         return redirect(url_for('main.index'))
 
-    # Llama a la función sin pasar argumentos
+    correo_docente = session['correo']
     estudiantes = obtener_cursos_y_estudiantes_por_docente()
+    asignaciones = []
+    id_semestre = None
 
-    return render_template('Docentes/PanelDocente.html', estudiantes=estudiantes)
+    if request.method == 'POST':
+        id_semestre = request.form.get('id_semestre')
+        if id_semestre:
+            asignaciones = obtener_asignacion_notas(correo_docente, id_semestre)
 
-docente_routes = Blueprint('docente_routes', __name__)
+    semestres = [
+        {'id': 1, 'nombre': 'Primer Semestre'},
+        {'id': 2, 'nombre': 'Segundo Semestre'},
+        {'id': 3, 'nombre': 'Tercer Semestre'},
+        {'id': 4, 'nombre': 'Cuarto Semestre'},
+        {'id': 5, 'nombre': 'Quinto Semestre'},
+    ]
 
-@docente_routes.route('/panel-docente', methods=['GET'])
-def panel_docente():
-    if 'correo_docente' not in session:
-        return redirect(url_for('login'))  # Redirigir al login si no hay sesión activa
-
-    estudiantes = obtener_cursos_y_estudiantes_por_docente()
-    return render_template('Docentes/PanelDocente.html', estudiantes=estudiantes)
+    return render_template(
+        'Docentes/PanelDocente.html',
+        estudiantes=estudiantes,
+        asignaciones=asignaciones,
+        semestres=semestres,
+        id_semestre=id_semestre
+    )
 
 @bp.route('/logout')
 def logout():
     session.clear()  # Limpia la sesión
     flash('Has cerrado sesión.', 'info')
     return redirect(url_for('main.index'))  # Redirige al inicio
-

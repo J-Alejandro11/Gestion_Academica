@@ -41,7 +41,7 @@
                     </div>
                     <div class="user-details">
                         <span class="welcome">Bienvenido</span>
-                        <span class="email">docente@miumq.edu.gt</span>
+                        <span class="email">{{ session['correo'] }}</span>
                     </div>
                 </div>
 
@@ -69,19 +69,72 @@
                             <h3>Seleccione el Semestre Académico</h3>
                         </div>
                         <div class="card-body">
-                            <div class="semester-selector">
-                                <select class="umg-select">
-                                    <option value="">-- Seleccione un semestre --</option>
-                                    <option value="2025-1">2025 - Primer Semestre</option>
-                                    <option value="2025-2">2025 - Segundo Semestre</option>
-                                    <option value="2026-1">2026 - Primer Semestre</option>
-                                </select>
-                                <button class="umg-btn umg-btn-primary">
-                                    <i class="fas fa-search"></i> Buscar
-                                </button>
+                            <form method="POST" action="{{ url_for('main.panel_docente') }}">
+                                <div class="semester-selector">
+                                    <label for="id_semestre">Semestre:</label>
+                                    <select class="umg-select" name="id_semestre" id="id_semestre" required>
+                                        <option value="">-- Seleccione un semestre --</option>
+                                        {% for semestre in semestres %}
+                                        <option value="{{ semestre.id }}" {% if id_semestre == semestre.id %}selected{% endif %}>
+                                            {{ semestre.nombre }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="umg-btn umg-btn-primary">
+                                        <i class="fas fa-search"></i> Buscar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% if asignaciones %}
+                    <div class="umg-card">
+                        <div class="card-header">
+                            <h3>Asignaciones de Notas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="umg-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Estudiante</th>
+                                            <th>Curso</th>
+                                            <th>Sección</th>
+                                            <th>Semestre</th>
+                                            <th>Zona</th>
+                                            <th>Parcial 1</th>
+                                            <th>Parcial 2</th>
+                                            <th>Final</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for asignacion in asignaciones %}
+                                        <tr>
+                                            <td>{{ asignacion.Estudiante }}</td>
+                                            <td>{{ asignacion.NombreCurso }}</td>
+                                            <td>{{ asignacion.Seccion }}</td>
+                                            <td>{{ asignacion.Semestre }}</td>
+                                            <td>{{ asignacion.Zona }}</td>
+                                            <td>{{ asignacion.Parcial1 }}</td>
+                                            <td>{{ asignacion.Parcial2 }}</td>
+                                            <td>{{ asignacion.Final }}</td>
+                                            <td>{{ asignacion.Total }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="umg-card">
+                        <div class="card-body">
+                            <p>No hay asignaciones de notas disponibles para este semestre.</p>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
 
                 <!-- Sección de Listado de Estudiantes -->
