@@ -10,6 +10,8 @@ class AsignacionNotasModel:
         try:
             query = text("""
                 SELECT 
+                    Cal.IdEstudiante,
+                    Cal.IdCursoSemestre,
                     U.Nombre AS Estudiante,
                     C.NombreCurso,
                     CS.Seccion,

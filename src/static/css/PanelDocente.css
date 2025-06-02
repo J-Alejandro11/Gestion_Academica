@@ -421,3 +421,142 @@ body {
         width: 100%;
     }
 }
+
+/* Botones de acción en una fila */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+.action-buttons button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.umg-btn-warning {
+    background-color: var(--warning-color);
+    color: #212529;
+}
+
+.umg-btn-danger {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+.umg-btn-warning:hover {
+    background-color: #e0a800;
+}
+.umg-btn-danger:hover {
+    background-color: #c82333;
+}
+.umg-btn-success {
+    background-color: var(--success-color);
+    color: #fff;
+}
+.umg-btn-success:hover {
+    background-color: #218838;
+}
+.umg-btn-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+.umg-btn-info:hover {
+    background-color: #138496;
+}
+.umg-btn-light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+.umg-btn-light:hover {
+    background-color: #e2e6ea;
+}
+.umg-btn-dark {
+    background-color: #343a40;
+    color: #fff;
+}
+
+/* Botones */
+.umg-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.umg-btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.umg-btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.umg-btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.umg-btn-sm {
+    font-size: 0.9em;
+    padding: 6px 10px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* Formulario dentro del modal */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}

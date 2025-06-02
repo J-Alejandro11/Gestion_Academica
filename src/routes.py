@@ -5,6 +5,7 @@ from src.controllers.calificaciones_controller import obtener_calificaciones_por
 from src.controllers.administrador_controller import verificar_credenciales_administrador
 from src.controllers.CursoEstudiante_controller import obtener_cursos_y_estudiantes_por_docente
 from src.controllers.AsignacionNotas_controller import obtener_asignacion_notas
+from src.controllers.EditNotas_controller import actualizar_calificacion
 
 bp = Blueprint('main', __name__)
 
@@ -117,9 +118,40 @@ def panel_docente():
     id_semestre = None
 
     if request.method == 'POST':
-        id_semestre = request.form.get('id_semestre')
-        if id_semestre:
-            asignaciones = obtener_asignacion_notas(correo_docente, id_semestre)
+        if 'actualizar_calificacion' in request.form:
+            print("Formulario recibido:", request.form)
+            id_estudiante = request.form.get('id_estudiante')
+            id_curso_semestre = request.form.get('id_curso_semestre')
+            zona = request.form.get('zona')
+            parcial1 = request.form.get('parcial1')
+            parcial2 = request.form.get('parcial2')
+            final = request.form.get('final')
+
+            if id_estudiante and id_curso_semestre:
+                exito = actualizar_calificacion(
+                    id_estudiante,
+                    id_curso_semestre,
+                    zona,
+                    parcial1,
+                    parcial2,
+                    final
+                )
+                if exito:
+                    flash('Calificación actualizada correctamente.', 'success')
+                else:
+                    flash('Error al actualizar la calificación.', 'danger')
+            else:
+                flash('Datos incompletos para actualizar la calificación.', 'danger')
+
+            # Mantener el semestre seleccionado después de actualizar
+            id_semestre = request.form.get('id_semestre')
+            if id_semestre:
+                asignaciones = obtener_asignacion_notas(correo_docente, id_semestre)
+        else:
+            # Selección de semestre
+            id_semestre = request.form.get('id_semestre')
+            if id_semestre:
+                asignaciones = obtener_asignacion_notas(correo_docente, id_semestre)
 
     semestres = [
         {'id': 1, 'nombre': 'Primer Semestre'},

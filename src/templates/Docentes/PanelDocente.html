@@ -25,9 +25,8 @@
             </div>
             <nav class="umg-nav">
                 <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
                     <li class="active"><a href="#"><i class="fas fa-chalkboard-teacher"></i> Docente</a></li>
-                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                    <li><a href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
                 </ul>
             </nav>
         </header>
@@ -107,6 +106,7 @@
                                             <th>Parcial 2</th>
                                             <th>Final</th>
                                             <th>Total</th>
+                                            <th>Acciones</th> <!-- Nueva columna para los botones -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,6 +121,23 @@
                                             <td>{{ asignacion.Parcial2 }}</td>
                                             <td>{{ asignacion.Final }}</td>
                                             <td>{{ asignacion.Total }}</td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button
+                                                        class="umg-btn umg-btn-warning umg-btn-sm"
+                                                        title="Editar"
+                                                        data-id-estudiante="{{ asignacion.IdEstudiante }}"
+                                                        data-id-curso-semestre="{{ asignacion.IdCursoSemestre }}"
+                                                        data-zona="{{ asignacion.Zona }}"
+                                                        data-parcial1="{{ asignacion.Parcial1 }}"
+                                                        data-parcial2="{{ asignacion.Parcial2 }}"
+                                                        data-final="{{ asignacion.Final }}"
+                                                        onclick="openEditModal(this)"
+                                                    >
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -204,6 +221,63 @@
             
             return false;
         }
+
+        function openEditModal(button) {
+            document.getElementById('id_estudiante').value = button.getAttribute('data-id-estudiante');
+            document.getElementById('id_curso_semestre').value = button.getAttribute('data-id-curso-semestre');
+            document.getElementById('zona').value = button.getAttribute('data-zona');
+            document.getElementById('parcial1').value = button.getAttribute('data-parcial1');
+            document.getElementById('parcial2').value = button.getAttribute('data-parcial2');
+            document.getElementById('final').value = button.getAttribute('data-final');
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        // Cerrar modal
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // Cerrar si se hace clic fuera del modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
     </script>
+
+    <!-- Agrega esto justo antes del cierre de </body> -->
+<!-- Ventana emergente de edición de calificaciones -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Editar Calificaciones</h3>
+        <form id="editGradesForm" method="POST" action="{{ url_for('main.panel_docente') }}">
+            <input type="hidden" name="actualizar_calificacion" value="1">
+            <input type="hidden" id="id_estudiante" name="id_estudiante">
+            <input type="hidden" id="id_curso_semestre" name="id_curso_semestre">
+            <input type="hidden" id="id_semestre_modal" name="id_semestre" value="{{ id_semestre }}">
+            <div class="form-group">
+                <label for="zona">Zona:</label>
+                <input type="number" id="zona" name="zona" required>
+            </div>
+            <div class="form-group">
+                <label for="parcial1">Parcial 1:</label>
+                <input type="number" id="parcial1" name="parcial1" required>
+            </div>
+            <div class="form-group">
+                <label for="parcial2">Parcial 2:</label>
+                <input type="number" id="parcial2" name="parcial2" required>
+            </div>
+            <div class="form-group">
+                <label for="final">Final:</label>
+                <input type="number" id="final" name="final" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="umg-btn umg-btn-primary">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
