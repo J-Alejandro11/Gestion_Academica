@@ -34,15 +34,15 @@
                 </div>
                 <h2>Autenticación Requerida</h2>
                 
-                <form class="admin-form">
+                <form class="admin-form" method="POST" action="{{ url_for('main.login_administrador') }}">
                     <div class="input-group">
                         <label><i class="fas fa-envelope"></i> Correo Administrativo</label>
-                        <input type="email" placeholder="ejemplo@umg.edu.gt" required>
+                        <input type="email" name="email" placeholder="ejemplo@umg.edu.gt" required>
                     </div>
                     
                     <div class="input-group">
                         <label><i class="fas fa-key"></i> Contraseña</label>
-                        <input type="password" placeholder="••••••••" required>
+                        <input type="password" name="password" placeholder="••••••••" required>
                     </div>
 
                     <button type="submit" class="admin-button">

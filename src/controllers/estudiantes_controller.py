@@ -19,3 +19,4 @@ def verificar_credenciales(correo, contrasena, rol_esperado):
     except Exception as ex:
         print(f"❌ Error al verificar credenciales: {ex}")
         return False
+    

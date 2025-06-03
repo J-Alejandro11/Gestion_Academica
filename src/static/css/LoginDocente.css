@@ -29,14 +29,29 @@ body {
     position: absolute;
     top: 20px;
     left: 20px;
-    color: var(--academic-blue);
+    color: white; /* Cambiado a blanco */
     text-decoration: none;
     font-size: 1rem;
-    z-index: 10;
+    z-index: 100; /* Aumentado el z-index */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(-3px);
+    text-decoration: none;
 }
 
 .back-button i {
-    margin-right: 5px;
+    margin-right: 0; /* Eliminamos el margin-right ya que usamos gap */
+    font-size: 0.9rem;
 }
 
 /* Encabezado docente */

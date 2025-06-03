@@ -1,0 +1,104 @@
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.041 seconds (145.102 MB/sec).
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.038 seconds (156.558 MB/sec).
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.023 seconds (258.661 MB/sec).
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.027 seconds (220.341 MB/sec).
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.032 seconds (185.913 MB/sec).
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.046 seconds (129.330 MB/sec).
+10 percent processed.
+20 percent processed.
+31 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.028 seconds (212.472 MB/sec).
+10 percent processed.
+20 percent processed.
+30 percent processed.
+40 percent processed.
+50 percent processed.
+60 percent processed.
+70 percent processed.
+80 percent processed.
+90 percent processed.
+100 percent processed.
+Processed 760 pages for database 'GestionAcademica', file 'GestionAcademica' on file 1.
+Processed 2 pages for database 'GestionAcademica', file 'GestionAcademica_log' on file 1.
+BACKUP DATABASE successfully processed 762 pages in 0.031 seconds (191.910 MB/sec).

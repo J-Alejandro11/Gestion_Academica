@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMG - Panel del Administrador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/umg-admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="umg-container">
+        <!-- Header UMG -->
+        <header class="umg-header">
+            <div class="umg-logo">
+                <div>
+                    <h1>UNIVERSIDAD MARIANO GÁLVEZ</h1>
+                    <p>Sistema de Gestión Académica</p>
+                </div>
+            </div>
+            <nav class="umg-nav">
+                <ul>
+                    <li>
+                        <a href="#" id="btn-respaldo" onclick="ejecutarRespaldo(event)">
+                            <i class="fas fa-database"></i> Respaldo Data Base
+                        </a>
+                    </li>
+                    <li class="active"><a href="#"><i class="fas fa-user-cog"></i> Administrador</a></li>
+                    <li><a href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Contenido Principal -->
+        <main class="umg-main">
+            <div class="umg-sidebar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="welcome">Bienvenido</span>
+                        <span class="email">Admin@miumg.edu.gt</span>
+                    </div>
+                </div>
+
+                <nav class="sidebar-menu">
+                    <h3>MENÚ ADMINISTRATIVO</h3>
+                    <ul>
+                        <li><a href="#" onclick="showSection('register-section')"><i class="fas fa-user-plus"></i> Registrar Usuarios</a></li>
+                        <li class="active"><a href="#" onclick="showSection('assign-section')"><i class="fas fa-chalkboard-teacher"></i> Asignar Docentes</a></li>
+                        <li><a href="#" onclick="showSection('courses-section')"><i class="fas fa-book"></i> Asignar Cursos</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="umg-content">
+                <!-- Sección de Registro de Usuarios -->
+                <div class="content-section" id="register-section">
+                    <div class="umg-content-header">
+                        <h2><i class="fas fa-user-plus"></i> Registrar Nuevo Usuario</h2>
+                        <div class="breadcrumb">
+                            <span>Administrador</span> / <span>Registro de Usuarios</span>
+                        </div>
+                    </div>
+                    <div class="umg-card">
+                        <div class="card-body">
+                            <!-- Mostrar mensajes flash -->
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                              {% if messages %}
+                              {% endif %}
+                            {% endwith %}
+                            <form class="register-form" method="POST" action="{{ url_for('main.registrar_usuario') }}">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre completo:</label>
+                                    <input type="text" id="nombre" name="nombre" required placeholder="Nombre y Apellido">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="correo">Correo Institucional:</label>
+                                    <input type="email" id="correo" name="correo" required placeholder="ejemplo@miumg.edu.gt">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="contrasena">Contraseña:</label>
+                                    <input type="password" id="contrasena" name="contrasena" required placeholder="Contraseña">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="rol">Rol:</label>
+                                    <select id="rol" name="rol" required>
+                                        <option value="">Seleccione un rol</option>
+                                        <option value="Docente">Docente</option>
+                                        <option value="Estudiante">Estudiante</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="form-submit">
+                                    <i class="fas fa-save"></i> Registrar Usuario
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección de Asignación de Docentes -->
+                <div class="content-section active" id="assign-section">
+                    <div class="umg-content-header">
+                        <h2><i class="fas fa-chalkboard-teacher"></i> Asignar Docentes a Cursos</h2>
+                        <div class="breadcrumb">
+                            <span>Administrador</span> / <span>Asignar Docentes</span>
+                        </div>
+                    </div>
+                    <div class="umg-card">
+                        <div class="card-body">
+                            <form class="assign-form" method="POST" action="{{ url_for('main.asignar_docente') }}">
+                                <div class="form-group">
+                                    <label for="semester">Semestre:</label>
+                                    <select id="semester" name="semestre_nombre" required onchange="loadCourses()">
+                                        <option value="">Seleccione un semestre</option>
+                                        <!-- Aquí se cargarán los semestres disponibles -->
+                                        {% for semestre in semestres %}
+                                            <option value="{{ semestre.nombre }}">{{ semestre.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Cursos Disponibles:</label>
+                                    <div id="courses-container" class="courses-container">
+                                        <!-- Aquí se cargarán los checkboxes de cursos con name="cursos_ids" y value=IdCurso -->
+                                        <p class="no-courses">Seleccione un semestre para ver los cursos disponibles</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="section">Sección:</label>
+                                    <input type="text" id="section" name="seccion" required placeholder="Ej: A, B, C...">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="teacher">Docente:</label>
+                                    <div class="teacher-select">
+                                        <select id="teacher" name="correo_docente" required>
+                                            <option value="">Seleccione un docente</option>
+                                            {% if docentes %}
+                                                <!-- Aquí se cargarán los docentes disponibles -->
+                                                {% for docente in docentes %}
+                                                    <option value="{{ docente.correo }}">{{ docente.nombre }}</option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="">Byron Figueroa</option>
+                                            {% endif %}
+                                            <option value="">Erwin Macz</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="form-submit">
+                                    <i class="fas fa-user-plus"></i> Asignar Cursos
+                                </button>
+                            </form>
+
+                            {% if cursos_asignados %}
+                                <div style="margin-top: 2em;">
+                                    <h3>Cursos Asignados en el Semestre</h3>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Curso</th>
+                                                <th>Docente</th>
+                                                <th>Sección</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for curso in cursos_asignados %}
+                                            <tr>
+                                                <td>{{ curso.codigo }}</td>
+                                                <td>{{ curso.nombre }}</td>
+                                                <td>{{ curso.docente }}</td>
+                                                <td>{{ curso.seccion }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Sección: Asignar Cursos a Estudiantes -->
+                <div class="content-section active" id="courses-section">
+                    <div class="umg-content-header">
+                        <h2><i class="fas fa-book"></i> Asignar Cursos a Estudiantes</h2>
+                        <div class="breadcrumb">
+                            <span>Administrador</span> / <span>Asignar Cursos a Estudiantes</span>
+                        </div>
+                    </div>
+                    <div class="umg-card">
+                        <div class="card-body">
+                            <form class="assign-course-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="student-semester">Semestre:</label>
+                                        <select id="student-semester" name="student-semester" required></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="student">Estudiante:</label>
+                                        <select id="student" name="student" required>
+                                            <option value="">Seleccione un estudiante</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Cursos Disponibles:</label>
+                                    <div class="courses-checkboxes">
+                                        <p class="no-courses">Seleccione un semestre para ver los cursos disponibles</p>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="form-submit">
+                                    <i class="fas fa-user-graduate"></i> Asignar Cursos
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="umg-footer">
+            <p>© 2023 Universidad Mariano Gálvez de Guatemala - Todos los derechos reservados</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar solo la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar el menú activo
+            document.querySelectorAll('.sidebar-menu li').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.parentElement.classList.add('active');
+            
+            return false;
+        }
+        
+        function loadCourses() {
+            const semestre = document.getElementById('semester').value;
+            const container = document.getElementById('courses-container');
+            container.innerHTML = '<p class="no-courses">Cargando cursos...</p>';
+            if (!semestre) {
+                container.innerHTML = '<p class="no-courses">Seleccione un semestre para ver los cursos disponibles</p>';
+                return;
+            }
+            fetch(`/api/cursos_por_semestre?semestre_nombre=${encodeURIComponent(semestre)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cursos.length === 0) {
+                        container.innerHTML = '<p class="no-cursos">No hay cursos para este semestre.</p>';
+                    } else {
+                        container.innerHTML = data.cursos.map(curso =>
+                            `<label><input type="checkbox" name="cursos_ids" value="${curso.id}"> ${curso.codigo} - ${curso.nombre}</label><br>`
+                        ).join('');
+                    }
+                });
+        }
+    </script>
+
+    <script>
+        function ejecutarRespaldo(event) {
+            event.preventDefault();
+            fetch('/respaldo-bd', {method: 'POST'})
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                })
+                .catch(error => {
+                    alert('Error al ejecutar el respaldo.');
+                });
+        }
+    </script>
+
+</body>
+</html>
