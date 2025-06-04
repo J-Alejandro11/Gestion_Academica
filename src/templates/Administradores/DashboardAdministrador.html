@@ -151,13 +151,21 @@
                                                 <option value="">Byron Figueroa</option>
                                             {% endif %}
                                             <option value="">Erwin Macz</option>
+                                            <option value="">Amanda Bac</option>
                                         </select>
                                     </div>
                                 </div>
                                 
-                                <button type="submit" class="form-submit">
-                                    <i class="fas fa-user-plus"></i> Asignar Cursos
-                                </button>
+                            <button type="submit" class="form-submit" onclick="mostrarError(event)">
+                                <i class="fas fa-user-plus"></i> Asignar Cursos
+                            </button>
+
+                            <script>
+                            function mostrarError(event) {
+                                event.preventDefault(); // Evita que el formulario se envíe
+                                alert("Error: Cursos ya asignados.");
+                            }
+                            </script>
                             </form>
 
                             {% if cursos_asignados %}
